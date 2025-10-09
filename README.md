@@ -2,7 +2,7 @@
 
 A free online sharing tool to quickly generate short links for text, URLs, and images. Secure and convenient, all shared content expires after 24 hours.
 
-🔗 **Live Demo**: [https://sharetoolbox.zwz.workers.dev](https://sharetoolbox.zwz.workers.dev)
+🔗 **Live Demo**: [https://sharetoolbox.com](https://sharetoolbox.com)
 
 ## ✨ Features
 
