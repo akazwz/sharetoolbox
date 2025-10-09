@@ -1,87 +1,114 @@
-# Welcome to React Router!
+# Share Toolbox
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A free online sharing tool to quickly generate short links for text, URLs, and images. Secure and convenient, all shared content expires after 24 hours.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+🔗 **Live Demo**: [https://sharetoolbox.zwz.workers.dev](https://sharetoolbox.zwz.workers.dev)
 
-## Features
+## ✨ Features
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+- 📝 **Share Text** - Quickly share text snippets with a short link
+- 🔗 **Share Links** - Convert long URLs into short, shareable links
+- 🖼️ **Share Images** - Upload and share images instantly
+- ⏰ **24-Hour Expiry** - All shared content automatically expires after 24 hours
+- 🚀 **No Registration** - Start sharing immediately without creating an account
+- 🔒 **Secure** - Content is stored securely and automatically deleted
+- 📱 **Responsive** - Works seamlessly on desktop and mobile devices
 
-## Getting Started
+## 🛠️ Tech Stack
+
+- **Frontend**: React 19 + React Router 7
+- **UI Framework**: Chakra UI v3
+- **State Management**: TanStack Query
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Deployment**: Cloudflare Workers
+- **Storage**: Cloudflare KV + Images
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ or Bun
+- pnpm (recommended) or npm
 
 ### Installation
 
 Install the dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Development
 
-Start the development server with HMR:
+Start the development server:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Your application will be available at `http://localhost:5173`.
 
-## Building for Production
+## 📦 Building for Production
 
 Create a production build:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
-## Deployment
+## 🌐 Deployment
 
-### Docker Deployment
-
-To build and run using Docker:
+This project is deployed on Cloudflare Workers. To deploy:
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+cd workers
+pnpm run deploy
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+### Environment Setup
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+Make sure you have the following Cloudflare resources configured:
 
-### DIY Deployment
+- **KV Namespace** - For storing shared content
+- **Images** - For image uploads
+- **Rate Limiting** - To prevent abuse
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+## 📁 Project Structure
 
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+├── app/
+│   ├── routes/          # Application routes
+│   ├── components/      # React components
+│   └── root.tsx         # Root layout
+├── workers/             # Cloudflare Workers backend
+├── public/              # Static assets
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── manifest.json
+└── build/               # Production build output
 ```
 
-## Styling
+## 🔍 SEO Optimization
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+This project includes comprehensive SEO optimizations:
+
+- ✅ Complete meta tags (title, description, keywords)
+- ✅ Open Graph tags for social media sharing
+- ✅ Twitter Card support
+- ✅ JSON-LD structured data
+- ✅ Sitemap.xml
+- ✅ Robots.txt
+- ✅ PWA manifest
+
+## 📄 License
+
+MIT License - feel free to use this project for your own purposes.
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ---
 
-Built with ❤️ using React Router.
+Built with ❤️ using React Router and Cloudflare Workers.

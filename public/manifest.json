@@ -1,0 +1,20 @@
+{
+  "name": "Share Toolbox - Share Text, Links & Images",
+  "short_name": "Share Toolbox",
+  "description": "Free online sharing tool to quickly generate short links for text, URLs, and images. Secure and convenient, valid for 24 hours.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "en",
+  "dir": "ltr"
+}
