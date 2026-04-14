@@ -111,7 +111,7 @@ export function meta(_: Route.MetaArgs) {
 const items = [
 	{ value: "text", title: "Text", icon: LuText },
 	{ value: "link", title: "Link", icon: LuLink2 },
-	{ value: "image", title: "image", icon: LuCamera },
+	{ value: "image", title: "Image", icon: LuCamera },
 ];
 
 export default function Home(_: Route.ComponentProps) {
@@ -119,12 +119,12 @@ export default function Home(_: Route.ComponentProps) {
 	const [type, setType] = useState("text");
 	const [text, setText] = useState("");
 	const [link, setLink] = useState("");
-	const [image, setImage] = useState<number[] | null>(null);
+	const [image, setImage] = useState<File | null>(null);
 
 	function cleanContent() {
 		setText("");
 		setLink("");
-		setImage([]);
+		setImage(null);
 		setLinkId("")
 	}
 
@@ -141,9 +141,12 @@ export default function Home(_: Route.ComponentProps) {
 					if (link.trim() === "") {
 						throw new Error("Link is required");
 					}
-					// check is valid url
-					const url = new URL(link);
-					if (!url?.protocol.startsWith("http")) {
+					try {
+						const url = new URL(link);
+						if (!url.protocol.startsWith("http")) {
+							throw new Error("Invalid URL");
+						}
+					} catch {
 						throw new Error("Invalid URL");
 					}
 					break;
@@ -152,11 +155,21 @@ export default function Home(_: Route.ComponentProps) {
 					if (!image) {
 						throw new Error("Image is required");
 					}
+					if (image.size > 5 * 1024 * 1024) {
+						throw new Error("Image must be less than 5MB");
+					}
 					break;
+			}
+			const formData = new FormData();
+			formData.append("type", type);
+			if (type === "image" && image) {
+				formData.append("content", image);
+			} else {
+				formData.append("content", text || link);
 			}
 			const response = await fetch("/api/share", {
 				method: "POST",
-				body: JSON.stringify({ type, content: text || link || image }),
+				body: formData,
 			});
 			const json = (await response.json()) as { id: string };
 			return json;
@@ -211,7 +224,7 @@ export default function Home(_: Route.ComponentProps) {
 					{type === "text" && (
 						<Textarea
 							value={text}
-							onInput={(e) => setText(e.currentTarget.value)}
+							onChange={(e) => setText(e.currentTarget.value)}
 							placeholder="Enter your text here"
 							autoresize
 							resize="none"
@@ -223,7 +236,7 @@ export default function Home(_: Route.ComponentProps) {
 					{type === "link" && (
 						<Input
 							value={link}
-							onInput={(e) => setLink(e.currentTarget.value)}
+							onChange={(e) => setLink(e.currentTarget.value)}
 							placeholder="Enter your link here"
 							w="full"
 						/>
@@ -238,13 +251,9 @@ export default function Home(_: Route.ComponentProps) {
 								"image/avif",
 								"image/webp",
 							]}
-							onFileAccept={async (e) => {
+							onFileAccept={(e) => {
 								const file = e.files[0];
-								const ab = await file.arrayBuffer();
-								const bytes = new Uint8Array(ab);
-								// number[]
-								const array = Array.from(bytes);
-								setImage(array);
+								setImage(file);
 							}}
 						>
 							<FileUpload.HiddenInput />
