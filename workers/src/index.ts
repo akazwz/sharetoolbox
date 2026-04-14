@@ -25,11 +25,10 @@ app.get("/s/:id", async (c) => {
 	switch (metadata.type) {
 		case "text": {
 			const text = new TextDecoder().decode(data);
-			const byteLength = new TextEncoder().encode(text).byteLength;
 			return new Response(text, {
 				headers: {
 					"Content-Type": "text/plain; charset=utf-8",
-					"Content-Length": byteLength.toString(),
+					"Content-Length": data.byteLength.toString(),
 				},
 			});
 		}

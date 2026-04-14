@@ -252,8 +252,7 @@ export default function Home(_: Route.ComponentProps) {
 								"image/webp",
 							]}
 							onFileAccept={(e) => {
-								const file = e.files[0];
-								setImage(file);
+								setImage(e.files[0] ?? null);
 							}}
 						>
 							<FileUpload.HiddenInput />
